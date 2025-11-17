@@ -3,13 +3,13 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.product.Product;
 
 public class ProductBasket {
-    private static final Product[] basket = new Product[5];
+    private final Product[] basket = new Product[5];
 
-    public void addProductToBasket(Product name) {
+    public void addProductToBasket(Product product) {
         for (int i = 0; i < basket.length; i++) {
             if (basket[i] == null) {
-                basket[i] = name;
-                break;
+                basket[i] = product;
+                return;
             }
             if (basket[i] != null && i == 4) {
                 System.out.println("Невозможно добавить продукт");
@@ -22,7 +22,7 @@ public class ProductBasket {
         int totalCost = 0;
         for (Product product : basket) {
             if (product != null) {
-                totalCost = totalCost + product.getPrice();
+                totalCost += product.getPrice();
             }
         }
         return totalCost;
@@ -37,9 +37,9 @@ public class ProductBasket {
         System.out.println("Итого: " + this.totalCost());
     }
 
-    public boolean checkProduct(String name) {
+    public boolean checkProductExist(String name) {
         for (Product product : basket) {
-            if (product.getName().equals(name)) {
+            if (product.getName().equals(name) && product.getName() != null && name != null) {
                 return true;
             }
         }

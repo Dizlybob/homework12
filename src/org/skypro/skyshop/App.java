@@ -19,8 +19,8 @@ public class App {
         basket.addProductToBasket(chocolate1);
         basket.addProductToBasket(candy2);
         System.out.println(" ");
-        System.out.println(basket.checkProduct(candy2.getName()));
-        System.out.println(basket.checkProduct(candy1.getName()));
+        System.out.println(basket.checkProductExist(candy2.getName()));
+        System.out.println(basket.checkProductExist(candy1.getName()));
         System.out.println(" ");
         basket.listBasket();
         basket.emptyBasket();

@@ -11,11 +11,8 @@ public class ProductBasket {
                 basket[i] = product;
                 return;
             }
-            if (basket[i] != null && i == 4) {
-                System.out.println("Невозможно добавить продукт");
-                break;
-            }
         }
+        System.out.println("Невозможно добавить продукт");
     }
 
     public int totalCost() {
@@ -39,7 +36,7 @@ public class ProductBasket {
 
     public boolean checkProductExist(String name) {
         for (Product product : basket) {
-            if (product.getName().equals(name) && product.getName() != null && name != null) {
+            if (product != null && product.getName().equals(name)) {
                 return true;
             }
         }

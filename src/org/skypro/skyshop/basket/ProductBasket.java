@@ -32,6 +32,13 @@ public class ProductBasket {
             }
         }
         System.out.println("Итого: " + this.totalCost());
+        byte specialProducts = 0;
+        for (Product slot : basket) {
+            if (slot != null && slot.isSpecial()) {
+                specialProducts++;
+            }
+        }
+        System.out.println("Специальных товаров: " + specialProducts);
     }
 
     public boolean checkProductExist(String name) {

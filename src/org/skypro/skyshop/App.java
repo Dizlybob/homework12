@@ -5,6 +5,8 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
+import org.skypro.skyshop.search.SearchEngine;
+import org.skypro.skyshop.website.Article;
 
 public class App {
     public static void main(String[] args) {
@@ -30,5 +32,27 @@ public class App {
         basket.addProductToBasket(candy2);
         System.out.println(" ");
         basket.listBasket();
+        System.out.println(" ");
+
+
+        System.out.println("ООП. Полиморфизм. Интерфейсы");
+
+        SearchEngine searchEngine = new SearchEngine(8);
+
+        Article article1 = new Article("Что-то о производителей продуктов", "Текст о производителей продуктов");
+        Article article2 = new Article("Что-то о продуктах", "Текст о продуктах");
+
+        searchEngine.add(milk1);
+        searchEngine.add(candy1);
+        searchEngine.add(melon1);
+        searchEngine.add(petFood1);
+        searchEngine.add(chocolate1);
+        searchEngine.add(candy2);
+        searchEngine.add(article1);
+        searchEngine.add(article2);
+        System.out.println(" ");
+        searchEngine.search("а");
+        System.out.println(" ");
+        System.out.println(milk1.getStringRepresentation());
     }
 }

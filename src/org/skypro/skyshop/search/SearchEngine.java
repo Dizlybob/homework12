@@ -19,8 +19,10 @@ public class SearchEngine {
                 break;
             }
         }
-        for (Searchable searchable : similarObjects) {
-            System.out.println(searchable);
+        for (Searchable similarObject : similarObjects) {
+            if (similarObject != null) {
+                System.out.println(similarObject);
+            }
         }
     }
 

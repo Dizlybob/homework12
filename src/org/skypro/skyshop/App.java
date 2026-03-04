@@ -5,11 +5,21 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
+import org.skypro.skyshop.search.BestResultNotFound;
 import org.skypro.skyshop.search.SearchEngine;
+import org.skypro.skyshop.search.Searchable;
 import org.skypro.skyshop.website.Article;
 
 public class App {
     public static void main(String[] args) {
+        //Исключения в Java
+        System.out.println("Exception");
+        try {
+            Product apple2 = new DiscountedProduct("Яблоко", 120, (byte) -1);
+        } catch (IllegalArgumentException e) {
+            System.out.println("В цену товара или процент скидки указаны недопустимое число");
+        }
+        System.out.println(" ");
         Product milk1 = new FixPriceProduct("Моё");
         Product melon1 = new SimpleProduct("Арбуз", 250);
         Product candy1 = new SimpleProduct("Шипучка", 15);
@@ -51,8 +61,25 @@ public class App {
         searchEngine.add(article1);
         searchEngine.add(article2);
         System.out.println(" ");
-        searchEngine.search("а");
+        Searchable[] searchables = searchEngine.search("а");
+        for (Searchable searchable : searchables) {
+            if (searchable != null) {
+                System.out.println(searchable.getStringRepresentation());
+            }
+        }
         System.out.println(" ");
         System.out.println(milk1.getStringRepresentation());
+        System.out.println(" ");
+        try {
+            System.out.println(searchEngine.getSearchTerm("о").getStringRepresentation());
+        } catch (BestResultNotFound e) {
+            System.out.println("Не было найдено лучшего результата по Вашему запросу !");
+        }
+        System.out.println(" ");
+        try {
+            System.out.println(searchEngine.getSearchTerm("Матрас").getStringRepresentation());
+        } catch (BestResultNotFound e) {
+            System.out.println("Не было найдено лучшего результата по Вашему запросу !");
+        }
     }
 }

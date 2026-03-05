@@ -2,13 +2,10 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 public class ProductBasket {
-    private final ArrayList<Product> basket = new ArrayList<>();
+    private final LinkedList<Product> basket = new LinkedList<>();
 
     public void addProductToBasket(Product product) {
         basket.add(product);
@@ -53,9 +50,9 @@ public class ProductBasket {
         basket.clear();
     }
 
-    public void removeProductFromBasket(String product) {
+    public LinkedList<Product> removeProductFromBasket(String product) {
         Iterator<Product> iterator = basket.iterator();
-        ArrayList<Product> deletedProducts = new ArrayList<>();
+        LinkedList<Product> deletedProducts = new LinkedList<>();
         while (iterator.hasNext()) {
             Product element = iterator.next();
             if (element.getName().equals(product)) {
@@ -63,10 +60,6 @@ public class ProductBasket {
                 deletedProducts.add(element);
             }
         }
-        if (deletedProducts.isEmpty()) {
-            System.out.println("Список удаленных продуктов пуст");
-        } else {
-            System.out.println("Удаленные продукты: " + deletedProducts);
-        }
+        return deletedProducts;
     }
 }

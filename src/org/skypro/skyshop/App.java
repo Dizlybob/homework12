@@ -10,7 +10,7 @@ import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 import org.skypro.skyshop.website.Article;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class App {
     public static void main(String[] args) {
@@ -52,11 +52,11 @@ public class App {
         System.out.println(" ");
         basket.listBasket();
         System.out.println(" ");
-        basket.removeProductFromBasket("Моё");
+        System.out.println(basket.removeProductFromBasket("Моё"));
         System.out.println(" ");
         basket.listBasket();
         System.out.println(" ");
-        basket.removeProductFromBasket("Мыло");
+        System.out.println(basket.removeProductFromBasket("Мыло"));
         System.out.println(" ");
         basket.listBasket();
         System.out.println(" ");
@@ -80,7 +80,7 @@ public class App {
         System.out.println(" ");
         System.out.println("Поиск");
         System.out.println(" ");
-        ArrayList<Searchable> searchables = searchEngine.search("а");
+        LinkedList<Searchable> searchables = searchEngine.search("а");
         for (Searchable searchable : searchables) {
             if (searchable != null) {
                 System.out.println(searchable.getStringRepresentation());

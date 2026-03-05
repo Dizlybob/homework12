@@ -1,6 +1,7 @@
 package org.skypro.skyshop.search;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class SearchEngine {
     public ArrayList<Searchable> searchablesObjects;
@@ -9,8 +10,8 @@ public class SearchEngine {
         this.searchablesObjects = new ArrayList<>();
     }
 
-    public ArrayList<Searchable> search(String target) {
-        ArrayList<Searchable> similarObjects = new ArrayList<>();
+    public LinkedList<Searchable> search(String target) {
+        LinkedList<Searchable> similarObjects = new LinkedList<>();
         for (Searchable object : searchablesObjects) {
             if (object != null && object.searchTerm().contains(target)) {
                 similarObjects.add(object);
@@ -20,8 +21,8 @@ public class SearchEngine {
     }
 
     public Searchable getSearchTerm(String target) throws BestResultNotFound {
-        ArrayList<Integer> bunchOfSimularities = new ArrayList<>();
-        ArrayList<Searchable> objects = this.search(target);
+        LinkedList<Integer> bunchOfSimularities = new LinkedList<>();
+        LinkedList<Searchable> objects = this.search(target);
         for (Searchable obj : objects) {
             int index = 0;
             int amountOfSimilarities = 0;

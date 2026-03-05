@@ -1,31 +1,28 @@
 package org.skypro.skyshop.search;
 
-public class SearchEngine {
-    public Searchable[] searchablesObjects;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
-    public SearchEngine(int n) {
-        this.searchablesObjects = new Searchable[n];
+public class SearchEngine {
+    public ArrayList<Searchable> searchablesObjects;
+
+    public SearchEngine() {
+        this.searchablesObjects = new ArrayList<>();
     }
 
-    public Searchable[] search(String target) {
-        Searchable[] similarObjects = new Searchable[5];
-        byte a = 0;
-        for (int i=0; i< searchablesObjects.length; i++) {
-            if (searchablesObjects[i] != null && searchablesObjects[i].searchTerm().contains(target)) {
-                similarObjects[a] = searchablesObjects[i];
-                a++;
-            }
-            if (a >= 5) {
-                break;
+    public LinkedList<Searchable> search(String target) {
+        LinkedList<Searchable> similarObjects = new LinkedList<>();
+        for (Searchable object : searchablesObjects) {
+            if (object != null && object.searchTerm().contains(target)) {
+                similarObjects.add(object);
             }
         }
         return similarObjects;
     }
 
     public Searchable getSearchTerm(String target) throws BestResultNotFound {
-        int[] bunchOfSimularities = new int[5];
-        Searchable[] objects = this.search(target);
-        byte i = 0;
+        LinkedList<Integer> bunchOfSimularities = new LinkedList<>();
+        LinkedList<Searchable> objects = this.search(target);
         for (Searchable obj : objects) {
             int index = 0;
             int amountOfSimilarities = 0;
@@ -39,31 +36,25 @@ public class SearchEngine {
                 index = indexOfTarget + target.length();
                 indexOfTarget = objName.indexOf(target, index);
             }
-            bunchOfSimularities[i] = amountOfSimilarities;
-            i++;
+            bunchOfSimularities.add(amountOfSimilarities);
         }
         int numberOfBestResult = 0;
         int maxAmount = 0;
-        for (int j = 0; j < bunchOfSimularities.length; j++) {
-            if (maxAmount < bunchOfSimularities[j]) {
-                maxAmount = bunchOfSimularities[j];
+        int j = 0;
+        for (int num  : bunchOfSimularities) {
+            if (maxAmount < num) {
+                maxAmount = num;
                 numberOfBestResult = j;
             }
+            j++;
         }
-        if (objects[numberOfBestResult] == null) {
+        if (maxAmount == 0) {
             throw new BestResultNotFound(target);
         }
-        return objects[numberOfBestResult];
+        return objects.get(numberOfBestResult);
     }
 
     public void add(Searchable obj) {
-        for (int i = 0; i < searchablesObjects.length; i++) {
-            if (searchablesObjects[i] == null) {
-                searchablesObjects[i] = obj;
-                System.out.println("Добавлено");
-                return;
-            }
-        }
-        System.out.println("Нет мест");
+        searchablesObjects.add(obj);
     }
 }

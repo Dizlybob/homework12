@@ -10,6 +10,8 @@ import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 import org.skypro.skyshop.website.Article;
 
+import java.util.LinkedList;
+
 public class App {
     public static void main(String[] args) {
         //Исключения в Java
@@ -39,7 +41,22 @@ public class App {
         System.out.println(" ");
         basket.listBasket();
         basket.emptyBasket();
-        basket.addProductToBasket(candy2);
+        System.out.println(" ");
+        basket.listBasket();
+        System.out.println(" ");
+        //Удаление продукта
+        System.out.println("Функция удаления продукта из корзины");
+        basket.addProductToBasket(milk1);
+        basket.addProductToBasket(melon1);
+        basket.addProductToBasket(candy1);
+        System.out.println(" ");
+        basket.listBasket();
+        System.out.println(" ");
+        System.out.println(basket.removeProductFromBasket("Моё"));
+        System.out.println(" ");
+        basket.listBasket();
+        System.out.println(" ");
+        System.out.println(basket.removeProductFromBasket("Мыло"));
         System.out.println(" ");
         basket.listBasket();
         System.out.println(" ");
@@ -47,7 +64,7 @@ public class App {
 
         System.out.println("ООП. Полиморфизм. Интерфейсы");
 
-        SearchEngine searchEngine = new SearchEngine(8);
+        SearchEngine searchEngine = new SearchEngine();
 
         Article article1 = new Article("Что-то о производителей продуктов", "Текст о производителей продуктов");
         Article article2 = new Article("Что-то о продуктах", "Текст о продуктах");
@@ -61,14 +78,14 @@ public class App {
         searchEngine.add(article1);
         searchEngine.add(article2);
         System.out.println(" ");
-        Searchable[] searchables = searchEngine.search("а");
+        System.out.println("Поиск");
+        System.out.println(" ");
+        LinkedList<Searchable> searchables = searchEngine.search("а");
         for (Searchable searchable : searchables) {
             if (searchable != null) {
                 System.out.println(searchable.getStringRepresentation());
             }
         }
-        System.out.println(" ");
-        System.out.println(milk1.getStringRepresentation());
         System.out.println(" ");
         try {
             System.out.println(searchEngine.getSearchTerm("о").getStringRepresentation());
